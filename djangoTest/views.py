@@ -6,7 +6,7 @@ from django.http import StreamingHttpResponse
 from django.shortcuts import render
 import struct
 
-host = "127.0.0.1"
+host = "127.0.0.1"  # 服务器本地ip
 port = 5005
 clientSocket = socket(AF_INET, SOCK_STREAM)
 

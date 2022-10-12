@@ -29,7 +29,7 @@ class VideoCamera(object):
 
 cam = VideoCamera()
 
-host = "192.168.0.53"
+host = "192.168.0.53"#服务器ip
 port = 5005
 
 clientSocket = socket(AF_INET, SOCK_STREAM)
