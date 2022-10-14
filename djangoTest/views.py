@@ -28,6 +28,7 @@ def gen(clientSocket):
             recv_len = struct.unpack("i", recv_msg_len)[0]
             frame = clientSocket.recv(recv_len)
             last_frame = frame
+            clientSocket.send("get msg".encode())
         except:
             frame = last_frame  # 防止没有frame输出
         # print(len(frame))

@@ -24,6 +24,8 @@ def camClient(ip_port, new_client):
 def djangoClient(ip_port, new_client):
     print('客户端的ip地址和端口号：', ip_port)
     while True:
+        recv_msg_len = new_client.recv(1024)
+        # print(recv_msg_len.decode())
         pass
 
 
@@ -44,7 +46,7 @@ if __name__ == '__main__':
         new_client, ip_port = tcp_server_socket.accept()
         clients.append(new_client)
 
-        if ip_port[0] == '192.168.0.25':  # cam的ip地址
+        if ip_port[0] == '192.168.0.29':  # cam的ip地址
             # 当客户端与服务端建立连接成功时，创建子线程，让子线程专门负责接收客户端的消息
             cam_thread = threading.Thread(target=camClient, args=(ip_port, new_client))
             # 设置守护主线程，主线程退出子线程销毁
