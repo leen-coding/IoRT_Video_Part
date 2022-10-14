@@ -20,8 +20,8 @@ from . import views
 
 urlpatterns = [
 
-    path("gethtml",views.gethtml),
+    path("gethtml/",views.gethtml),
 
-    path("monitor", views.getmonitor)
+    path("monitor/", views.getmonitor)
 
 ]

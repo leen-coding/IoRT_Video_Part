@@ -51,10 +51,10 @@ if __name__ == '__main__':
             cam_thread.setDaemon(True)
             # 启动子线程
             cam_thread.start()
-
-        # 这里多线程是想把cam和其他客户端分离开。要不然不好处理
-        django_thread = threading.Thread(target=djangoClient, args=(ip_port, new_client))
-        # 设置守护主线程，主线程退出子线程销毁
-        django_thread.setDaemon(True)
-        # 启动子线程
-        django_thread.start()
+        else:
+            # 这里多线程是想把cam和其他客户端分离开。要不然不好处理
+            django_thread = threading.Thread(target=djangoClient, args=(ip_port, new_client))
+            # 设置守护主线程，主线程退出子线程销毁
+            django_thread.setDaemon(True)
+            # 启动子线程
+            django_thread.start()
