@@ -9,14 +9,17 @@ def camClient(ip_port, new_client):
     print('客户端的ip地址和端口号：', ip_port)
     while True:  # 循环接收客户端的数据
         recv_msg_len = new_client.recv(4)
-        recv_len = struct.unpack("i", recv_msg_len)[0]
-        if recv_len > 0:  # 这里也是防止报错加了个判断条件
-            recv_data = new_client.recv(recv_len)
-            # print(len(recv_data))
-            for client in clients:
-                frame_len = struct.pack("i", len(recv_data))
-                client.send(frame_len)
-                client.send(recv_data)
+        try:
+            recv_len = struct.unpack("i", recv_msg_len)[0]
+            if recv_len > 0:  # 这里也是防止报错加了个判断条件
+                recv_data = new_client.recv(recv_len)
+                # print(len(recv_data))
+                for client in clients:
+                    frame_len = struct.pack("i", len(recv_data))
+                    client.send(frame_len)
+                    client.send(recv_data)
+        except:
+            pass
 
 
 # 处理客户端请求的任务
