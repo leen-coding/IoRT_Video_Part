@@ -28,7 +28,7 @@ class VideoCamera(object):
         # so we must encode it into JPEG in order to correctly display the
         # video stream.
         # print(np.size(image))
-        image = cv2.resize(image,(100,100))
+        image = cv2.resize(image,(200,200))
         ret, jpeg = cv2.imencode('.jpg', image)
         return jpeg.tobytes()
 
@@ -49,12 +49,6 @@ while True:
     clientSocket.send(frame_len)#先发一个当前frame的Bytes长度。指导服务端接受的buffer的大小
     clientSocket.send(frame)
 
-    recv_msg_len = clientSocket.recv(4)#下面几行是防止阻塞。由于客户端需要转发给所有客户端，所以这里需要有一个接收的函数
-
-    try: #这里try是为了避免收到的信息长度为0报错
-        recv_len = struct.unpack("i", recv_msg_len)[0]
-        useless = clientSocket.recv(recv_len)
-    except:
-        pass
     time.sleep(0.03)
     print("send success")
+

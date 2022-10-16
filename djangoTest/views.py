@@ -26,7 +26,14 @@ def gen(clientSocket):
         try:
             recv_msg_len = clientSocket.recv(4)
             recv_len = struct.unpack("i", recv_msg_len)[0]
-            frame = clientSocket.recv(recv_len)
+            buf = b""
+            while recv_len > 0:
+                temp_buf = clientSocket.recv(recv_len)
+                recv_len -= len(temp_buf)
+                buf += temp_buf
+            # recv_len = struct.unpack("i", recv_msg_len)[0]
+            # frame = clientSocket.recv(recv_len)
+            frame = buf
             last_frame = frame
             clientSocket.send("get msg".encode())
         except:
